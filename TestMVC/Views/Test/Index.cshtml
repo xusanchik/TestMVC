@@ -1,0 +1,175 @@
+﻿
+@model List<TestMVC.Models.Test>
+
+<style>
+    input[type=radio] {
+        display: none;
+    }
+
+    label {
+        display: block;
+        width: 95%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+    /*     input[type=radio] + label {
+            display: block;
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            cursor: pointer;
+        } */
+
+    input[type=radio] + label:hover {
+        border: 1px solid #000000;
+    }
+    /* input[type=radio]:checked ~ label {
+            background-image: none;
+            background-color: #0C0;
+            color: #fff;
+            border: 1px solid #0C0 !important;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            -ms-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+        } */
+
+    .worngans, .success {
+        background-color: #F36;
+        color: #fff;
+        border: 1px solid #F36 !important;
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .worngans {
+        background-color: #F36;
+        border: 1px solid #F36 !important;
+    }
+
+    .success {
+        background-color: green;
+        border: 1px solid green !important;
+    }
+</style>
+<h2>Testlar Ro'yxati</h2>
+@if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
+{
+<form>
+    <button asp-controller"Test" asp-action="AddTest" type="submit">  create</button>
+    <button asp-controller"Test" asp-action="Questions" type="submit"> Questions</button>
+    <button asp-controller"Test" asp-action="TableQuestions" type="submit">  Index</button>
+</form>
+}
+@if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("MANAGER"))
+{
+    <form>
+        <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "UserResult")'">ResultTest</button>
+        <button asp-controller"Test" asp-action="TableQuestions" type="submit">  Index</button>
+    </form>
+}
+
+@if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("USER") )
+{
+        
+
+<html>
+<body>
+    <div class="scp-quizzes-main">
+        <form id="myForm" action="@Url.Action("Test", "Check")" method="post">
+            @foreach (var test in Model)
+            {
+                <div class="scp-quizzes-data question">
+                    <h3> @test.Id. @test.Question </h3>
+                    <br />
+                    @foreach (var option in test.Options)
+                    {
+                        <input class="squaretest" type="radio" id="@test.Id@option" name="@test.Id" value="@option" answer="@test.RightOption" />
+                        <label data-id="@test.Id" data-optionId="@option" for="@test.Id@option"> @option </label> <br />
+                        <input type="hidden" id="OptionRight_@test.Id" name="OptionRights[@test.Id]" value="@option" />
+                    }
+                </div>
+            }
+            <button class="click-btn" id="checkClick" type="button"> Check</button>
+            <button class="btn-confirm hide" asp-controller="Task" asp-action="Index" type="submit">Logout</button>
+
+        </form>
+
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type='text/javascript'></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('label').click(function () {
+            var testId = $(this).data('id');
+            var optionId = $(this).data('optionid');
+            // Unselect all labels in the current question
+            $('label[data-id="' + testId + '"]').removeClass('worngans');
+            // Select the clicked label
+            $(this).addClass('worngans');
+            // Set the selected option as the value of the corresponding hidden input
+            $('#OptionRight_' + testId).val(optionId);
+        });
+
+        $('#checkClick').click(function () {
+            const myArray = [];
+            $('.squaretest:checked').each(function () {
+                const testId = $(this).attr('name');
+                const answer = $(this).attr('answer');
+                const optionId = $(this).val();
+                if (optionId == answer) {
+                    this.nextElementSibling.classList.remove('worngans')
+                    this.nextElementSibling.classList.add('success')
+                }
+
+                myArray.push({ testId, optionId });
+            });
+            $.ajax({
+                type: "POST", // Метод HTTP-запроса
+                url: "/Test/Check", // URL вашего контроллера и действия
+                data: { myArray: myArray }, // Данные, которые вы отправляете
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+
+        });
+    });
+
+
+    let clickEnabled = true;
+    const containers = document.querySelectorAll('.question');
+    containers.forEach(function (container) {
+        const squaretest = container.querySelectorAll('.squaretest');
+        squaretest.forEach(function (choice) {
+            choice.addEventListener('click', function (evt) {
+                if (clickEnabled) {
+                    squaretest.forEach(function (c) {
+                        c.classList.remove('bg-danger');
+                    });
+                    evt.target.classList.add('bg-danger');
+                }
+            });
+        });
+    });
+
+    console.log(document.querySelector('.click-btn'))
+    document.querySelector('.click-btn').addEventListener("click", (evt) => {
+        console.log(evt.target)
+    })
+
+</script>
+}

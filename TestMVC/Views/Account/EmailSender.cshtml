@@ -1,0 +1,12 @@
+﻿@model TestMVC.Dto_s.EmailSenderDto
+
+<h1> EmailSender</h1>
+
+<form asp-controller="Account" asp-action="Login" method="post">
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" type="text" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <button asp-controller="Account" asp-action="EmailSender" type="submit" class="btn btn-primary my-4">Send</button>
+</form>

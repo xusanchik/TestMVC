@@ -1,0 +1,78 @@
+﻿@using TestMVC.Models
+@model IEnumerable<TestMVC.Models.Task>
+
+
+<h1>Task</h1>
+@if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
+{
+
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+    <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "AuditView")'">View Audit</button>
+    <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Create", "Task")'">Create Task</button>
+    <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "Test")'">Test</button>
+    <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "UserResult")'">ResultTest</button>
+    <button class="btn btn-info" onclick="location.pathname = 'swagger'">Swagger</button>
+}
+@if (User.Identity != null &&  User.IsInRole("MANAGER"))
+{
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+    <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "Test")'">Test</button>
+
+
+}
+@if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("USER"))
+{
+    <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "Test")'">Test</button>
+    <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "UserResult")'">ResultTest</button>
+}
+
+<table class="table  table-bordered table-hover my-2">
+    <thead class="thead-dark">
+        <tr>
+
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.DueDate)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.EStatus)
+            </th>
+            @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
+            {
+                <th></th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DueDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EStatus)
+                </td>
+                @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a> |
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,30 @@
+﻿@model List<TestMVC.Models.Test>
+
+<h2>Checklist</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Question</th>
+            <th>Answers</th>
+            <th>True Answer</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var test in Model)
+        {
+            <tr>
+                <td>@test.Id</td>
+                <td>@test.Question</td>
+                <td>
+                    @foreach (var answer in test.Options)
+                    {
+                        <div>@answer</div>
+                    }
+                </td>
+                <td>@test.RightOption</td>
+            </tr>
+        }
+    </tbody>
+</table>

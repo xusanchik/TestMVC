@@ -1,0 +1,24 @@
+﻿
+@model List<TestMVC.Models.UserResult>
+
+<h2>Checklist</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>UserName</th>
+            <th>Result</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var test in Model)
+        {
+            <tr>
+                <td>@test.Id</td>
+                <td>@test.UserName</td>
+                <td>@test.Result</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
