@@ -47,7 +47,7 @@ builder.Services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions
 var app = builder.Build();
 using (var serviceScope = app.Services.CreateScope())
 {
-    await Saad.SeedUsersAndRolesAsync(serviceScope.ServiceProvider);
+    await Seed.SeedUsersAndRolesAsync(serviceScope.ServiceProvider);
 }
 
 if (!app.Environment.IsDevelopment())

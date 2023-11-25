@@ -1,11 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using TestMVC.Models;
-using TestMVC.Models.ERole;
 using Task = System.Threading.Tasks.Task;
+using TestMVC.Models.ERole;
 
 namespace TestMVC.Data;
-public class Saad
+
+public class Seed
 {
+    /// <summary>
+    /// Seeds roles and users into the database.
+    /// </summary>
+    /// <param name="serviceProvider">The service provider for obtaining necessary services.</param>
     public static async Task SeedUsersAndRolesAsync(IServiceProvider serviceProvider)
     {
         using (var serviceScope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
@@ -27,13 +32,21 @@ public class Saad
             }
         }
     }
-
+    /// <summary>
+    /// Seeds roles into the database.
+    /// </summary>
+    /// <param name="roleManager">Role manager for managing identity roles.</param>
     private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
     {
         await CreateRoleAsync(roleManager, ERole.Admin);
-        await CreateRoleAsync(roleManager, ERole.User);
         await CreateRoleAsync(roleManager, ERole.Manager);
+        await CreateRoleAsync(roleManager, ERole.User);
     }
+    /// <summary>
+    /// Creates a role if it does not exist.
+    /// </summary>
+    /// <param name="roleManager">Role manager for managing identity roles.</param>
+    /// <param name="role">The role to create.</param>
     private static async Task CreateRoleAsync(RoleManager<IdentityRole> roleManager, ERole role)
     {
         var roleName = role.ToString();
@@ -44,14 +57,24 @@ public class Saad
             Console.WriteLine($"{roleName} role created successfully.");
         }
     }
-
+    /// <summary>
+    /// Seeds users into the database.
+    /// </summary>
+    /// <param name="userManager">User manager for managing identity users.</param>
     private static async Task SeedUsersAsync(UserManager<User> userManager)
     {
-        await CreateUserAsync(userManager, "Abdumutal.com", "Abdumutal", "A0601221a_", ERole.User);
-        await CreateUserAsync(userManager, "Nuriddin.com", "Nuriddin", "B0601221b_", ERole.Admin);
-        await CreateUserAsync(userManager, "Moxir.com", "Moxir", "C0601221b_", ERole.Manager);
+        await CreateUserAsync(userManager, "Jenny@gmail.com", "Jenny", "A0601221a_", ERole.Admin);
+        await CreateUserAsync(userManager, "Coma@gmail.com", "Coma", "B0601221b_", ERole.Manager);
+        await CreateUserAsync(userManager, "Vin@gmail.com", "Vin", "C0601221c_", ERole.User);
     }
- 
+    /// <summary>
+    /// Creates a user if it does not exist and adds them to a specified role.
+    /// </summary>
+    /// <param name="userManager">User manager for managing identity users.</param>
+    /// <param name="email">The email address of the user.</param>
+    /// <param name="userName">The username of the user.</param>
+    /// <param name="password">The password of the user.</param>
+    /// <param name="role">The role to assign to the user.</param>
     private static async Task CreateUserAsync(UserManager<User> userManager, string email, string userName, string password, ERole role)
     {
         var existingUser = await userManager.FindByEmailAsync(email);

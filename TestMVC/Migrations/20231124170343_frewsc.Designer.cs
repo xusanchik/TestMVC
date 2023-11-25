@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TestMVC.Data;
@@ -12,9 +13,11 @@ using TestMVC.Data;
 namespace TestMVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231124170343_frewsc")]
+    partial class frewsc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,19 +54,19 @@ namespace TestMVC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "924c65a0-2bab-43bb-b341-0c1fd59d3acd",
+                            Id = "300c42ac-36d5-46d1-9320-ef003ecdbe82",
                             Name = "ADMIN",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "abe4c73e-ff68-4567-9df1-115ab2e3af1a",
+                            Id = "9a1a3041-40e7-41da-affa-e6a214048b9d",
                             Name = "USER",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "9df12ccb-af88-475e-97a0-5a47226fa086",
+                            Id = "5621cb2b-fd46-42a8-8975-3afda5ac6c8b",
                             Name = "MANAGER",
                             NormalizedName = "MANAGER"
                         });

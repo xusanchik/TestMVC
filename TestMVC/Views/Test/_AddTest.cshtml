@@ -39,7 +39,7 @@ form {
 
 
 </style>
-@if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
+@if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("ADMIN") || User.IsInRole("MANAGER"))
 {
     
 

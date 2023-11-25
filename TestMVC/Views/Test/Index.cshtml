@@ -64,7 +64,7 @@
 @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("ADMIN"))
 {
 <form>
-    <button asp-controller"Test" asp-action="AddTest" type="submit">  create</button>
+    <button asp-controller"Test" asp-action="AddTest" type="submit">  Create</button>
     <button asp-controller"Test" asp-action="Questions" type="submit"> Questions</button>
     <button asp-controller"Test" asp-action="TableQuestions" type="submit">  Index</button>
 </form>
@@ -72,8 +72,9 @@
 @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("MANAGER"))
 {
     <form>
-        <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "UserResult")'">ResultTest</button>
         <button asp-controller"Test" asp-action="TableQuestions" type="submit">  Index</button>
+        <button asp-controller"Test" asp-action="AddTest" type="submit">  Create</button>
+
     </form>
 }
 
