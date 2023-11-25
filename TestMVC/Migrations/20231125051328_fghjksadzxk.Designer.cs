@@ -13,8 +13,8 @@ using TestMVC.Data;
 namespace TestMVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231125042330_fghjk")]
-    partial class fghjk
+    [Migration("20231125051328_fghjksadzxk")]
+    partial class fghjksadzxk
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,19 +54,19 @@ namespace TestMVC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "924c65a0-2bab-43bb-b341-0c1fd59d3acd",
+                            Id = "32912680-c50d-495d-aceb-973ed7eabd5c",
                             Name = "ADMIN",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "abe4c73e-ff68-4567-9df1-115ab2e3af1a",
+                            Id = "04a1b3b8-3cb2-4ba3-94ee-f46325b939e8",
                             Name = "USER",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "9df12ccb-af88-475e-97a0-5a47226fa086",
+                            Id = "4eb9a5c2-5c9b-458f-b81b-11eec7322d17",
                             Name = "MANAGER",
                             NormalizedName = "MANAGER"
                         });
@@ -262,10 +262,6 @@ namespace TestMVC.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text");

@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TestMVC.Migrations
 {
     /// <inheritdoc />
-    public partial class cvghjklc : Migration
+    public partial class fghjksadzx : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,7 +34,6 @@ namespace TestMVC.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    Password = table.Column<string>(type: "text", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -249,9 +248,9 @@ namespace TestMVC.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "3cda8765-aaf3-4034-bf04-85a15ab0b1c2", null, "ADMIN", "ADMIN" },
-                    { "66c3cd51-bb32-49de-8bbd-6f45e68e16d6", null, "MANAGER", "MANAGER" },
-                    { "6a67b955-5df4-405c-9b51-026ef8a8a384", null, "USER", "USER" }
+                    { "4dce4031-342b-40cd-9beb-901be147f73b", null, "USER", "USER" },
+                    { "7aee18a1-7e17-4114-abbe-4a79957658a6", null, "MANAGER", "MANAGER" },
+                    { "f635a201-367f-414f-afd0-f70451263e4b", null, "ADMIN", "ADMIN" }
                 });
 
             migrationBuilder.InsertData(

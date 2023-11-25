@@ -30,6 +30,7 @@ public class UserRepository : IUserRepository
         if (!passResult)
             throw new Exception("Invalid email or password");
 
+
         var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
 
         if (!result.Succeeded)
@@ -45,13 +46,14 @@ public class UserRepository : IUserRepository
         if (existUser != null)
             throw new Exception("Email already taken ");
         var user = new User { UserName = model.Name, Email = model.Email };
-        user.Password = model.Password;
+        user.PasswordHash = model.Password;
         var result = await _userManager.CreateAsync(user, model.Password);
         if (result.Succeeded)
         {
                 if(model.Role == ERole.Admin)
                 {
                     await _userManager.AddToRoleAsync(user, "ADMIN");
+                user.PhoneNumber = model.Password;
                     await _context.SaveChangesAsync();
                 }
                 else if (model.Role == ERole.User)

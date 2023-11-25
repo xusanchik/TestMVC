@@ -51,19 +51,19 @@ namespace TestMVC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "924c65a0-2bab-43bb-b341-0c1fd59d3acd",
+                            Id = "bc2f5a5c-e718-4fdc-942c-9f61a354f0aa",
                             Name = "ADMIN",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "abe4c73e-ff68-4567-9df1-115ab2e3af1a",
+                            Id = "727acda1-4512-428a-8708-745ea2ba8068",
                             Name = "USER",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "9df12ccb-af88-475e-97a0-5a47226fa086",
+                            Id = "bafeb63c-7def-4263-a332-d3fd369fa0d0",
                             Name = "MANAGER",
                             NormalizedName = "MANAGER"
                         });
@@ -259,10 +259,6 @@ namespace TestMVC.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text");

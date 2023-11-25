@@ -119,7 +119,7 @@ namespace TestMVC.Controllers
             email.From.Add(MailboxAddress.Parse("samadovxusan9013@gmail.com"));
             email.To.Add(MailboxAddress.Parse(emailSenderDto.Email));
             email.Subject = "Your verification code";
-            email.Body = new TextPart(TextFormat.Html) { Text = "Your verification code is " + existUser.Password };
+            email.Body = new TextPart(TextFormat.Html) { Text = "Your verification code is " + existUser.PhoneNumber};
 
             var smpt = new SmtpClient();
             await smpt.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
