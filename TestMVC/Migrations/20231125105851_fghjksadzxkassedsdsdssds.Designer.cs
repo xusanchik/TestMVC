@@ -13,8 +13,8 @@ using TestMVC.Data;
 namespace TestMVC.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231125050904_fghjksadzx")]
-    partial class fghjksadzx
+    [Migration("20231125105851_fghjksadzxkassedsdsdssds")]
+    partial class fghjksadzxkassedsdsdssds
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,19 +54,19 @@ namespace TestMVC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f635a201-367f-414f-afd0-f70451263e4b",
+                            Id = "271b51d0-4e4f-4f48-b095-185575e6c463",
                             Name = "ADMIN",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4dce4031-342b-40cd-9beb-901be147f73b",
+                            Id = "7e22c1c0-c5c3-403c-8bea-9d0ad1c8d59e",
                             Name = "USER",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "7aee18a1-7e17-4114-abbe-4a79957658a6",
+                            Id = "7678145e-0682-4353-bb65-f032438b9ec6",
                             Name = "MANAGER",
                             NormalizedName = "MANAGER"
                         });
@@ -196,7 +196,7 @@ namespace TestMVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ckeckTests");
+                    b.ToTable("CkeckTests");
                 });
 
             modelBuilder.Entity("TestMVC.Models.AuditLog", b =>
@@ -323,7 +323,7 @@ namespace TestMVC.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tasks");
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("TestMVC.Models.Test", b =>

@@ -5,6 +5,7 @@ namespace TestMVC.Interface;
 public interface IUserRepository
 {
     Task<SignInResult> Login(LoginDto model);
+    Task<AdminDto> RegisterAdmin(AdminDto model);
     Task<RegisterDto> Register(RegisterDto model);
 
 }

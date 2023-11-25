@@ -51,19 +51,19 @@ namespace TestMVC.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bc2f5a5c-e718-4fdc-942c-9f61a354f0aa",
+                            Id = "271b51d0-4e4f-4f48-b095-185575e6c463",
                             Name = "ADMIN",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "727acda1-4512-428a-8708-745ea2ba8068",
+                            Id = "7e22c1c0-c5c3-403c-8bea-9d0ad1c8d59e",
                             Name = "USER",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "bafeb63c-7def-4263-a332-d3fd369fa0d0",
+                            Id = "7678145e-0682-4353-bb65-f032438b9ec6",
                             Name = "MANAGER",
                             NormalizedName = "MANAGER"
                         });
@@ -193,7 +193,7 @@ namespace TestMVC.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ckeckTests");
+                    b.ToTable("CkeckTests");
                 });
 
             modelBuilder.Entity("TestMVC.Models.AuditLog", b =>
@@ -320,7 +320,7 @@ namespace TestMVC.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("tasks");
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("TestMVC.Models.Test", b =>

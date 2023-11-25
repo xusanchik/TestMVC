@@ -32,6 +32,42 @@ namespace TestMVC.Controllers
             _signInManager = signInManager;
             _userManager = userManager;
         }
+
+
+        public IActionResult RegisterAdmin() => View();
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterAdmin(AdminDto model)
+        {
+            var validationResult = await new RegisterAdminEmail().ValidateAsync(model);
+
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+
+                return View(model);
+            }
+            try
+            {
+                await _userRepository.RegisterAdmin(model);
+
+                _toastNotification.AddSuccessToastMessage("Registration successfully!");
+
+                return RedirectToAction("Login", "Account");
+
+            }
+            catch (Exception ex)
+            {
+                _toastNotification.AddErrorToastMessage(ex.Message);
+                return View(model);
+            }
+        }
+
         public IActionResult Register() => View();
 
 
@@ -130,6 +166,10 @@ namespace TestMVC.Controllers
             _toastNotification.AddSuccessToastMessage("Seng Massage Success");
             return RedirectToAction("Login", "Account");
 
+        }
+        public async Task<IActionResult> Main()
+        {
+            return View();
         }
 
 

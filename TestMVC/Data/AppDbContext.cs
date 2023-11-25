@@ -15,13 +15,13 @@ public class AppDbContext:IdentityDbContext<User>
         this.Services = services;
     }
     public IServiceProvider Services { get; set; }
-    public DbSet<Task> tasks { get; set; }
+    public DbSet<Task> Tasks { get; set; }
     public  DbSet<AuditLog> AuditLog { get; set; }
     public DbSet<UserResult> UserResults { get; set; }
     public DbSet<Test> Test { get; set; }
 
 
-    public DbSet<CkeckTest> ckeckTests { get; set; }
+    public DbSet<CkeckTest> CkeckTests { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder builder)

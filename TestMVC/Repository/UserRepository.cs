@@ -75,4 +75,27 @@ public class UserRepository : IUserRepository
 
         return model ?? new RegisterDto();
     }
+    public async Task<AdminDto> RegisterAdmin(AdminDto model)
+    {
+        if (!CheckEmail.IsValidEmail(model.Email))
+            throw new Exception("Invalid email address format");
+        var existUser = await _userManager.FindByEmailAsync(model.Email);
+        if (existUser != null)
+            throw new Exception("Email already taken ");
+        var user = new User
+        {
+            UserName = model.Name,
+            Email = model.Email,
+        };
+        var result = await _userManager.CreateAsync(user, model.Password);
+        Console.WriteLine(result.Errors);
+        if (result.Succeeded)
+        {
+            await _userManager.AddToRoleAsync(user, "ADMIN");
+            await _context.SaveChangesAsync();
+        }
+        foreach (var error in result.Errors) throw new Exception($"{error.Description}");
+
+        return model ?? new AdminDto();
+    }
 }

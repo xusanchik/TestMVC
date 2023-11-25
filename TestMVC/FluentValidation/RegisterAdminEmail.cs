@@ -4,9 +4,9 @@ using TestMVC.ExtensionFunctions;
 
 namespace TestMVC.FluentValidation
 {
-    public class RegisterModelValidator : AbstractValidator<RegisterDto>
+    public class RegisterAdminEmail : AbstractValidator<AdminDto>
     {
-        public RegisterModelValidator()
+        public RegisterAdminEmail()
         {
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("Name is required.")
@@ -28,6 +28,6 @@ namespace TestMVC.FluentValidation
 
         }
 
+    
     }
-
 }

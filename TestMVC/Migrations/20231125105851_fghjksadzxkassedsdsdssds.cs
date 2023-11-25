@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace TestMVC.Migrations
 {
     /// <inheritdoc />
-    public partial class fghjksadzx : Migration
+    public partial class fghjksadzxkassedsdsdssds : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -73,7 +73,7 @@ namespace TestMVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ckeckTests",
+                name: "CkeckTests",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -83,7 +83,7 @@ namespace TestMVC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ckeckTests", x => x.Id);
+                    table.PrimaryKey("PK_CkeckTests", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -222,7 +222,7 @@ namespace TestMVC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tasks",
+                name: "Tasks",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -235,9 +235,9 @@ namespace TestMVC.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tasks", x => x.Id);
+                    table.PrimaryKey("PK_Tasks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_tasks_AspNetUsers_UserId",
+                        name: "FK_Tasks_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
@@ -248,9 +248,9 @@ namespace TestMVC.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "4dce4031-342b-40cd-9beb-901be147f73b", null, "USER", "USER" },
-                    { "7aee18a1-7e17-4114-abbe-4a79957658a6", null, "MANAGER", "MANAGER" },
-                    { "f635a201-367f-414f-afd0-f70451263e4b", null, "ADMIN", "ADMIN" }
+                    { "271b51d0-4e4f-4f48-b095-185575e6c463", null, "ADMIN", "ADMIN" },
+                    { "7678145e-0682-4353-bb65-f032438b9ec6", null, "MANAGER", "MANAGER" },
+                    { "7e22c1c0-c5c3-403c-8bea-9d0ad1c8d59e", null, "USER", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -308,8 +308,8 @@ namespace TestMVC.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_tasks_UserId",
-                table: "tasks",
+                name: "IX_Tasks_UserId",
+                table: "Tasks",
                 column: "UserId");
         }
 
@@ -335,10 +335,10 @@ namespace TestMVC.Migrations
                 name: "AuditLog");
 
             migrationBuilder.DropTable(
-                name: "ckeckTests");
+                name: "CkeckTests");
 
             migrationBuilder.DropTable(
-                name: "tasks");
+                name: "Tasks");
 
             migrationBuilder.DropTable(
                 name: "Test");

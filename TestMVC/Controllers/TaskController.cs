@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
+using TestMVC.Data;
 using TestMVC.Interface;
 using TestMVC.Models.ERole;
 using Task = TestMVC.Models.Task;
@@ -14,12 +15,16 @@ namespace TestMVC.Controllers
         private readonly ITaskRepository _taskRepository;
         private readonly UserManager<User> _userManager;
         private readonly IToastNotification _toastNotification;
+        private readonly AppDbContext _appDbContext;
+        private readonly SignInManager<User> _signInManager;
 
-        public TaskController(ITaskRepository productRepository, UserManager<User> userManager, IToastNotification toastNotification)
+        public TaskController(ITaskRepository productRepository, SignInManager<User> signInManager, UserManager<User> userManager, IToastNotification toastNotification,AppDbContext appDbContext)
         {
             _taskRepository = productRepository;
             _userManager = userManager;
             _toastNotification = toastNotification;
+            _appDbContext = appDbContext;
+            _signInManager = signInManager;
         }
 
         public async Task<IActionResult> Index()
@@ -159,6 +164,13 @@ namespace TestMVC.Controllers
         public IActionResult CreateTaskForUser()
         {
             return View();
+        }
+        public async Task<IActionResult> MyTask()
+        {
+            var user = await _signInManager.UserManager.GetUserAsync(User);
+            var Tas = await _appDbContext.Users.Include(x => x.Tasks).FirstOrDefaultAsync(s => s.Id == user.Id);
+            
+            return View(Tas);
         }
     }
 }

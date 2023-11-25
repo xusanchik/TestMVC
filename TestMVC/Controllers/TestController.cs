@@ -104,8 +104,7 @@ namespace TestMVC.Controllers
             _appDbContext.UserResults.Add(userres);
             await _appDbContext.SaveChangesAsync();
             return RedirectToAction("Index","UserResult", userres);
-            }
-
-    
+        }
+        
     }
 }

@@ -20,11 +20,11 @@ public class TaskRepository:ITaskRepository
         _userManager = userManager;
     }
 
-    public async Task<Models.Task> GetTaskByIdAsync(int taskId) => await _context.tasks.FirstOrDefaultAsync(x => x.Id == taskId);
+    public async Task<Models.Task> GetTaskByIdAsync(int taskId) => await _context.Tasks.FirstOrDefaultAsync(x => x.Id == taskId);
 
     public async Task<List<Models.Task>> GetAllTasksAsync()
     {
-        List<Task> tasks = await _context.tasks.ToListAsync();
+        List<Task> tasks = await _context.Tasks.ToListAsync();
         await Console.Out.WriteLineAsync(tasks.ToString());
         return tasks;
     }
@@ -48,19 +48,19 @@ public class TaskRepository:ITaskRepository
             _check.Tasks.Add(newTask);
         }
 
-        _context.tasks.Add(newTask);
+        _context.Tasks.Add(newTask);
         await _context.SaveChangesAsync();
     }
 
     public async Task<Task> UpdateTaskAsync(Models.Task task)
     {
-        var existingTask = await _context.tasks.FirstOrDefaultAsync(x => x.Id == task.Id);
+        var existingTask = await _context.Tasks.FirstOrDefaultAsync(x => x.Id == task.Id);
 
         if (existingTask != null)
         {
             existingTask.Title = task.Title;
             existingTask.Description = task.Description;
-            existingTask.DueDate = task.DueDate;
+            existingTask.DueDate = DateTime.UtcNow;
             existingTask.EStatus = task.EStatus;
 
             await _context.SaveChangesAsync();
@@ -68,12 +68,12 @@ public class TaskRepository:ITaskRepository
 
         return existingTask;
     }
-    public async Task<Task> GetOldValueAsync(int id) => await _context.tasks.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+    public async Task<Task> GetOldValueAsync(int id) => await _context.Tasks.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
     public async Task<Task> DeleteTaskAsync(int taskId)
     {
-        var currentProduct = await _context.tasks.FirstOrDefaultAsync(x => x.Id == taskId);
+        var currentProduct = await _context.Tasks.FirstOrDefaultAsync(x => x.Id == taskId);
         if (currentProduct == null) throw new Exception("Product not found");
-        _context.tasks.Remove(currentProduct);
+        _context.Tasks.Remove(currentProduct);
         await _context.SaveChangesAsync();
         return currentProduct;
 
@@ -104,14 +104,14 @@ public class TaskRepository:ITaskRepository
 
     public async Task<Task> CheckTaskName(Task task)
     {
-        var checkBase = await _context.tasks.FindAsync(task);
+        var checkBase = await _context.Tasks.FindAsync(task);
         return checkBase ?? new Task();
     }
 
     public async Task<User> AddTaskForUser(string email, string taskName)
     {
         var check = await _context.Users.FirstOrDefaultAsync(x => x.Email == email);
-        var checkTask = await _context.tasks.FirstOrDefaultAsync(x => x.Title == taskName);
+        var checkTask = await _context.Tasks.FirstOrDefaultAsync(x => x.Title == taskName);
         if (check.Tasks == null)
         {
             check.Tasks = new List<Task> { checkTask };

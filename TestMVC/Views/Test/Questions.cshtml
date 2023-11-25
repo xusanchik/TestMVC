@@ -67,20 +67,23 @@
         <form id="myForm" action="@Url.Action("Test", "Check")" method="post">
         @foreach (var test in Model)
         {
-                <div class="scp-quizzes-data question">
+            <div class="scp-quizzes-data question">
                 <h3> @test.Id. @test.Question </h3>
                 <br />
-                    @foreach(var option in test.Options)
-                    {
-                        <input class="squaretest" type="radio" id="@test.Id@option" name="@test.Id" value="@option" answer="@test.RightOption"/>
-                        <label data-id="@test.Id" data-optionId="@option" for="@test.Id@option"> @option </label> <br />
-
-                        <input type="hidden" id="OptionRight_@test.Id" name="OptionRights[@test.Id]" value="@option" />
-                    }
+                <ol>
+                        @foreach(var option in test.Options)
+                        {
+                            <li>
+                                <input class="squaretest" type="radio" id="@test.Id@option" name="@test.Id" value="@option" answer="@test.RightOption"/>
+                                <label data-id="@test.Id" data-optionId="@option" for="@test.Id@option"> @option </label> <br />
+                                <input type="hidden" id="OptionRight_@test.Id" name="OptionRights[@test.Id]" value="@option" />
+                            </li>
+                        }
+                </ol>
             </div>
         }
             <button class="click-btn" id="checkClick" type="button"> Check</button>
-        <button class="btn-confirm hide" asp-controller="Task" asp-action="Index" type="submit">Logout</button>
+        <button class="btn-confirm hide" asp-controller="Task" asp-action="Index" type="submit"> BACK </button>
 
         </form>
    
@@ -94,12 +97,15 @@
         $('label').click(function () {
             var testId = $(this).data('id');
             var optionId = $(this).data('optionid');
-            // Unselect all labels in the current question
             $('label[data-id="' + testId + '"]').removeClass('worngans');
-            // Select the clicked label
             $(this).addClass('worngans');
-            // Set the selected option as the value of the corresponding hidden input
             $('#OptionRight_' + testId).val(optionId);
+        });
+
+
+
+        $('#checkClick').one('click', function () {
+            $(this).prop('disabled', true);
         });
 
         $('#checkClick').click(function () {

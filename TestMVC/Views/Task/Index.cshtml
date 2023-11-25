@@ -8,22 +8,25 @@
 
     <a asp-action="Create" class="btn btn-primary">Create New</a>
     <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "AuditView")'">View Audit</button>
-    <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Create", "Task")'">Create Task</button>
+    @* <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Create", "Task")'">Create Task</button> *@
     <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "Test")'">Test</button>
+    <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("MyTask", "Task")'">MyTask</button>
     <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "UserResult")'">ResultTest</button>
     <button class="btn btn-info" onclick="location.pathname = 'swagger'">Swagger</button>
 }
 @if (User.Identity != null &&  User.IsInRole("MANAGER"))
 {
     <a asp-action="Create" class="btn btn-primary">Create New</a>
-    <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "Test")'">Test</button>
+    <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("MyTask", "Task")'">MyTask</button>
     <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "UserResult")'">ResultTest</button>
+    <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "Test")'">Test</button>
 
 
 
 }
 @if (User.Identity != null && User.Identity.IsAuthenticated && User.IsInRole("USER"))
 {
+    <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("MyTask", "Task")'">MyTask</button>
     <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "Test")'">Test</button>
     <button class="btn btn-dark" onclick="location.pathname = '@Url.Action("Index", "UserResult")'">ResultTest</button>
 }
